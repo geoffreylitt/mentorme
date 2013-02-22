@@ -58,4 +58,6 @@ Mentorme::Application.routes.draw do
 
   get "static_pages/home"
 
+  get "videotest" => "video_session#show"
+
 end
