@@ -1,4 +1,9 @@
 Mentorme::Application.routes.draw do
+  
+  root :to => "static_pages#home"
+
+  get "videotest" => "video_session#show"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -55,9 +60,5 @@ Mentorme::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
-
-  get "static_pages/home"
-
-  get "videotest" => "video_session#show"
 
 end
