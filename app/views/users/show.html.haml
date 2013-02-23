@@ -1,1 +1,20 @@
-%h1= @user.first_name
+%h1= "%s %s's profile" % [ @user.first_name, @user.last_name ]
+
+= "Bio:"
+= @user.bio
+%br
+
+= "Languages:"
+- @user.languages.each do |l|
+  = l.name
+%br
+= "Skills you want to learn:"
+- @user.learn_skills.each do |ls|
+  - s = Skill.find(ls.skill_id)
+  = s.name
+%br
+= "Skills you have:"
+-@user.teach_skills.each do |ts|
+  - s = Skill.find(ts.skill_id)
+  = s.name
+%br

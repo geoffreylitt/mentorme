@@ -1,11 +1,24 @@
 %h1= "Edit %s %s" % [ @user.first_name, @user.last_name ]
 
-= form_for @user, :url => { :action => "update" } do |f|
-  = f.label :bio, 'Bio'
-  = f.text_field :bio
-  = f.label :email, "English"
-  = f.check_box :email, {}, 1, 0
-  = f.label :timezone, "Arabic"
-  = f.check_box :timezone, {}, 1, 0
+= form_tag :action => :update do
+  = "Bio"
+  = text_field_tag 'bio'
   %br
-  = f.submit
+  = "Languages you speak:"
+  - Language.all.each do |l|
+    = l.name
+    = check_box_tag "languages[]", "#{l.id}"
+  %br
+  = "Skills you want to learn:"
+  - @skills.each do |s|
+    = s.name
+    = check_box_tag "learn_skills[]" , "#{s.id}"
+  %br
+  = "Skills you have:"
+  - @skills.each do |s|
+    = s.name
+    = check_box_tag "teach_skills[]", "#{s.id}"
+
+  %br
+  = submit_tag
+
