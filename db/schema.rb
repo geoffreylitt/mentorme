@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130223202525) do
+ActiveRecord::Schema.define(:version => 20130223203334) do
 
   create_table "languages", :force => true do |t|
     t.string   "name"
@@ -32,6 +32,9 @@ ActiveRecord::Schema.define(:version => 20130223202525) do
     t.string   "opentok_session_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.integer  "mentor_id"
+    t.integer  "mentee_id"
+    t.integer  "translator_id"
   end
 
   create_table "skills", :force => true do |t|

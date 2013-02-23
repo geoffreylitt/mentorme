@@ -1,10 +1,10 @@
 class Meeting < ActiveRecord::Base
-  attr_accessible :opentok_session_id, :time
+  attr_accessible :opentok_session_id, :time, :mentor_id, :mentee_id, :translator_id
   before_create :populate_session_id
 
-  has_one :mentor
-  has_one :mentee
-  has_one :translator
+  belongs_to :mentor, :class_name => "User"
+  belongs_to :mentee, :class_name => "User"
+  belongs_to :translator, :class_name => "User"
 
   protected
 
