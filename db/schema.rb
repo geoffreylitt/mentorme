@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20130223202525) do
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
     t.boolean  "taken"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "fb_uid"
