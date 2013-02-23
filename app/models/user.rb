@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :languages
   has_many :learn_skills
   has_many :teach_skills
+  has_many :time_slots
 
   def self.from_omniauth(auth)
     where(auth["uid"]).first || create_from_omniauth(auth)
