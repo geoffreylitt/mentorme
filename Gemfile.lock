@@ -106,6 +106,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  haml
   haml-rails
   jquery-rails
   opentok
