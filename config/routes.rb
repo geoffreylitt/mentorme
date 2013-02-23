@@ -12,7 +12,7 @@ Mentorme::Application.routes.draw do
   get '/auth/:provider/callback' => 'sessions#create'
 
   resources :users do
-    resources :timeslots
+    resources :time_slots
     resources :meetings
   end
 
