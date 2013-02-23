@@ -1,6 +1,7 @@
 KEYS = {}
 
 if Rails.env == 'production'
+  KEYS[:open_tok] = {}
   KEYS[:open_tok][:key] = ENV["OPENTOK-KEY"]
   KEYS[:open_tok][:secret] = ENV["OPENTOK-SECRET"]
 else
