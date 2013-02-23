@@ -18,6 +18,31 @@ ActiveRecord::Schema.define(:version => 20130223060711) do
     t.string   "opentok_session_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+  end 
+
+  create_table "languages", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "skills", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "fb_uid"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "image"
+    t.string   "location"
+    t.integer  "timezone"
+    t.string   "bio"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
