@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-      	redirect_to profile_url
+      	format.html { redirect_to action: "show" }
       else
         render 'edit'
       end
