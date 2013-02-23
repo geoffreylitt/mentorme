@@ -5,6 +5,8 @@ class TimeSlotsController < ApplicationController
     @time_slots = @user.time_slots.sort_by{|ts| ts.time}
     @new_time_slot = TimeSlot.new
 
+    @meeting = Meeting.new #new meeting to populate if they apply to a slot
+
     respond_to do |format|
       format.html {render :layout => "application" }
     end
