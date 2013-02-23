@@ -1,4 +1,6 @@
 class IosController < ApplicationController
+  skip_before_filter :authorize
+
   def auth_from_fb_uid
     u = User.find_by_fb_uid(params[:fb_id])
     @response = Hash.new
