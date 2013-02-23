@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   attr_accessible :bio, :email, :fb_uid, :first_name, :image, :last_name, :location, :timezone
 
   has_many :languages
+  has_many :learn_skills
+  has_many :teach_skills
 
   def self.from_omniauth(auth)
     where(auth["uid"]).first || create_from_omniauth(auth)

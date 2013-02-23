@@ -27,10 +27,24 @@ ActiveRecord::Schema.define(:version => 20130223060711) do
     t.integer  "user_id"
   end
 
+  create_table "learn_skills", :force => true do |t|
+    t.integer  "skill_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+  end
+
   create_table "skills", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "teach_skills", :force => true do |t|
+    t.integer  "skill_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
   end
 
   create_table "users", :force => true do |t|
