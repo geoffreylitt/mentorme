@@ -1,5 +1,11 @@
 class MeetingsController < ApplicationController
 
+  def index
+    @meetings = User.find(params[:user_id]).meetings
+
+
+  end
+
   def create
     @meeting = Meeting.new(params[:meeting])
 
