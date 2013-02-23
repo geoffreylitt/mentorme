@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/mkdynamic/omniauth-facebook
+  revision: 13c1eca2aedacc5791c5d99ca74053a240a68b6a
+  specs:
+    omniauth-facebook (1.4.1)
+      omniauth-oauth2 (~> 1.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -60,19 +67,15 @@ GEM
     mime-types (1.21)
     multi_json (1.6.1)
     multipart-post (1.1.5)
-    oauth2 (0.8.0)
     oauth2 (0.8.1)
       faraday (~> 0.8)
       httpauth (~> 0.1)
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    omniauth (1.1.0)
     omniauth (1.1.3)
       hashie (~> 1.2)
       rack
-    omniauth-facebook (1.4.1)
-      omniauth-oauth2 (~> 1.1.0)
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
@@ -133,7 +136,7 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   omniauth
-  omniauth-facebook
+  omniauth-facebook!
   opentok
   pg
   rails (= 3.2.11)

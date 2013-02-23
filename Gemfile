@@ -29,7 +29,7 @@ gem 'jquery-rails'
 gem 'opentok'
 gem 'haml'
 gem 'omniauth'
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', :git => 'https://github.com/mkdynamic/omniauth-facebook'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
