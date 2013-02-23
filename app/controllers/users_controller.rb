@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def index
+    @user = current_user
     @matches = current_user.matches
     respond_to do |format|
       format.html {render :layout => "application"}

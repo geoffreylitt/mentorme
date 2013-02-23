@@ -1,7 +1,9 @@
-= current_user.id
-= "Your matches:"
-%br
-- @matches.each do |match|
+%h3
+  = "Hi, #{current_user.first_name}!"
+%h2
+  = "Your matches:"
+- matches = @matches.first(5)
+- matches.each do |match|
   - user = User.find(match.first.to_i)
   = link_to "#{user.first_name} #{user.last_name}", user
   = "Skills: "
@@ -11,3 +13,13 @@
   - user.languages.each do |l|
     = l.name
   %br 
+- if @user.meetings
+  %h2
+    = "Your upcoming meetings:"
+  - @user.meetings.each do |m|
+    - mentor = m.mentor.id == @user.id ? "You" : "#{m.mentor.first_name} #{m.mentor.last_name}"
+    - mentee = m.mentee.id == @user.id ? "You" : "#{m.mentee.first_name} #{m.mentee.last_name}"
+    = "#{m.time} - Mentor: #{mentor}, Mentee: #{mentee}"
+    - if m.translator
+      - translator = m.translator.id == @user.id ? "You" : "#{m.translator.first_name} #{translator.last_name}"
+      - ", Translator: #{translator}"
