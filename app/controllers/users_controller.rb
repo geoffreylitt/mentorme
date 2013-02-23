@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 	def update
 
     @user = User.find(params[:id])
-
+    @user.languages = []
     if params[:languages]
       params[:languages].each do |language_id|
         @user.languages << Language.find(language_id)
@@ -51,7 +51,12 @@ class UsersController < ApplicationController
       end
       params[:teach_skills] = nil
     end
-    
+
+    if params[:bio]
+      params[:user] = true
+      params[:user] = {:bio => params[:bio]}
+      params[:bio] = nil
+    end
     respond_to do |format|
       if @user.update_attributes(params[:user])
       	format.html { redirect_to action: "show" }

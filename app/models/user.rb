@@ -1,8 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessible :bio, :email, :fb_uid, :first_name, :image, :last_name, :location, :timezone, :languages
 
-
-
   has_many :languages
   has_many :learn_skills
   has_many :teach_skills
