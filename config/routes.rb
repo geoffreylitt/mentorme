@@ -11,6 +11,9 @@ Mentorme::Application.routes.draw do
   get "videotest" => "meetings#show"
   get '/auth/:provider/callback' => 'sessions#create'
 
-  resources :users
+  resources :users do
+    resources :timeslots
+    resources :meetings
+  end
 
 end
