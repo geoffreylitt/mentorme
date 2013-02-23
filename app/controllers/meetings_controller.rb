@@ -10,7 +10,7 @@ class MeetingsController < ApplicationController
     @api_key = api_key #expose api_key
     @session_id = @meeting.opentok_session_id
 
-    @user_role = "mentor"
+    @user_role = params[:myrole] 
     #enable this and make a helper method once we have users
     #@user_role = current_user.role_in_meeting(@meeting)
 

@@ -9,8 +9,6 @@ $(document).ready(function() {
     var session;
     var publisher;
     var subscribers = {};
-    var VIDEO_WIDTH = 320;
-    var VIDEO_HEIGHT = 240;
 
     TB.addEventListener("exception", exceptionHandler);
     
@@ -30,17 +28,14 @@ $(document).ready(function() {
       session.addEventListener('connectionDestroyed', connectionDestroyedHandler);
       session.addEventListener('streamCreated', streamCreatedHandler);
       session.addEventListener('streamDestroyed', streamDestroyedHandler);
+
+      connect();
     }
 
     //--------------------------------------
-    //  LINK CLICK HANDLERS
+    //  UTILITY FUNCTIONS
     //--------------------------------------
 
-    /*
-    If testing the app from the desktop, be sure to check the Flash Player Global Security setting
-    to allow the page from communicating with SWF content loaded from the web. For more information,
-    see http://www.tokbox.com/opentok/build/tutorials/helloworld.html#localTest
-    */
     function connect() {
       session.connect(opentok_api_key, opentok_token);
     }
@@ -49,33 +44,26 @@ $(document).ready(function() {
       session.disconnect();
     }
 
-    /*don't think we need this funciton
-
-    // Called when user wants to start publishing to the session
     function startPublishing() {
       if (!publisher) {
-        var parentDiv = document.getElementById("myCamera");
-        var publisherDiv = document.createElement('div'); // Create a div for the publisher to replace
-        publisherDiv.setAttribute('id', 'opentok_publisher');
-        parentDiv.appendChild(publisherDiv);
-        var publisherProps = {width: VIDEO_WIDTH, height: VIDEO_HEIGHT};
-        publisher = TB.initPublisher(apiKey, publisherDiv.id, publisherProps);  // Pass the replacement div id and properties
+        var $stream_div = $("#" + user_role + "_stream"); // div to append stream to => "#mentor_stream", etc
+        var $publisher_div = $("<div></div>").attr("id", "opentok_publisher");
+
+        $stream_div.append($publisher_div);
+
+        //video size determined by the surrounding box's width
+        var publisher_props = {width: $publisher_div.width(), height: $publisher_div.height()};
+
+        publisher = TB.initPublisher(opentok_api_key, $publisher_div.attr("id"), publisher_props);  // Pass the replacement div id and properties
         session.publish(publisher);
-        show('unpublishLink');
-        hide('publishLink');
       }
     }
-
-    */
 
     function stopPublishing() {
       if (publisher) {
         session.unpublish(publisher);
       }
       publisher = null;
-
-      show('publishLink');
-      hide('unpublishLink');
     }
 
     //--------------------------------------
@@ -83,18 +71,46 @@ $(document).ready(function() {
     //--------------------------------------
 
     function sessionConnectedHandler(event) {
-      // Subscribe to all streams currently in the Session
-      for (var i = 0; i < event.streams.length; i++) {
-        addStream(event.streams[i]);
+       subscribeToStreams(event.streams);
+       startPublishing(); 
+    }
+    
+    function streamCreatedHandler(event) {
+      subscribeToStreams(event.streams);
+    }
+    
+    function subscribeToStreams(streams) {
+      for (i = 0; i < streams.length; i++) {
+        var stream = streams[i];
+        if (stream.connection.connectionId != session.connection.connectionId) {
+          //not myself, okay to subscribe
+
+          var $stream_div = $("#" + stream.connection.data + "_stream"); // div to append stream to => "#mentor_stream", etc
+          var $subscriber_div = $("<div></div>").attr("id", stream.streamID);
+
+          $stream_div.append($publisher_div);
+
+          //video size determined by the surrounding box's width
+          var subscriber_props = {width: $subscriber_div.width(), height: $subscriber_div.height()};
+
+          session.subscribe(stream, $subscriber_div.attr("id"), subscriber_props);
+        }
       }
     }
 
-    function streamCreatedHandler(event) {
-      // Subscribe to the newly created streams
-      for (var i = 0; i < event.streams.length; i++) {
-        addStream(event.streams[i]);
+    //eventually replace addStream entirely!
+    function addStream(stream) {
+      // Check if this is the stream that I am publishing, and if so do not publish.
+      if (stream.connection.connectionId == session.connection.connectionId) {
+        return;
       }
+      var subscriberDiv = document.createElement('div'); // Create a div for the subscriber to replace
+      subscriberDiv.setAttribute('id', stream.streamId); // Give the replacement div the id of the stream as its id.
+      document.getElementById("subscribers").appendChild(subscriberDiv);
+      var subscriberProps = {width: VIDEO_WIDTH, height: VIDEO_HEIGHT};
+      subscribers[stream.streamId] = session.subscribe(stream, subscriberDiv.id, subscriberProps);
     }
+
 
     function streamDestroyedHandler(event) {
       // This signals that a stream was destroyed. Any Subscribers will automatically be removed.
@@ -116,28 +132,12 @@ $(document).ready(function() {
       // This signals new connections have been created.
     }
 
-    /*
-    If you un-comment the call to TB.setLogLevel(), above, OpenTok automatically displays exception event messages.
-    */
+
     function exceptionHandler(event) {
       alert("Exception: " + event.code + "::" + event.message);
     }
 
-    //--------------------------------------
-    //  HELPER METHODS
-    //--------------------------------------
-
-    function addStream(stream) {
-      // Check if this is the stream that I am publishing, and if so do not publish.
-      if (stream.connection.connectionId == session.connection.connectionId) {
-        return;
-      }
-      var subscriberDiv = document.createElement('div'); // Create a div for the subscriber to replace
-      subscriberDiv.setAttribute('id', stream.streamId); // Give the replacement div the id of the stream as its id.
-      document.getElementById("subscribers").appendChild(subscriberDiv);
-      var subscriberProps = {width: VIDEO_WIDTH, height: VIDEO_HEIGHT};
-      subscribers[stream.streamId] = session.subscribe(stream, subscriberDiv.id, subscriberProps);
-    }
+  }
 
 });
 
