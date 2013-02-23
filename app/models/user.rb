@@ -22,4 +22,21 @@ class User < ActiveRecord::Base
     end
   end
 
+  def matches
+    matches = []    
+    scores = {}
+    ls = self.learn_skills.map{ |s| s.skill_id }
+    l = self.languages.map{ |ls| ls.name}
+    users = User.all
+    users.reject!{ |u| u.id == self.id }
+    users.each do |u|
+      ts = u.teach_skills.map{ |s| s.skill_id }
+      ul = u.languages.map{ |ls| ls.name } 
+      skill_intersect = (ts & ls).count
+      language_intersect = (l & ul).count
+      score = skill_intersect + language_intersect * 5
+      scores["#{u.id}"] = score
+    end
+    scores.sort_by{ |k, v| v}.reverse
+  end
 end

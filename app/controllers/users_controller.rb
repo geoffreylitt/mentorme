@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
-
   def index
-    @users = User.all
+    @matches = current_user.matches
     respond_to do |format|
       format.html {render :layout => "application"}
     end
@@ -33,8 +32,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.languages = []
     if params[:languages]
-      params[:languages].each do |language_id|
-        @user.languages << Language.find(language_id)
+      params[:languages].each do |language|
+        @user.languages << Language.create(:name => language)
       end
       params[:languages] = nil
     end

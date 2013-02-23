@@ -1,0 +1,7 @@
+= current_user.id
+= "Your matches:"
+%br
+- @matches.each do |match|
+  - user = User.find(match.first.to_i)
+  = "#{user.first_name} #{user.last_name}"
+  %br 
