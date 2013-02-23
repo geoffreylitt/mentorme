@@ -17,3 +17,5 @@
 # ignore sublime text project files
 *.sublime-project
 *.sublime-workspace
+
+config/secrets.yml
