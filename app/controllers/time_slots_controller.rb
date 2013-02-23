@@ -2,9 +2,11 @@ class TimeSlotsController < ApplicationController
 
   def index
     @user = current_user
-    @time_slots = @user.time_slots
+    @time_slots = @user.time_slots.sort_by{|ts| ts.time}
+    @new_time_slot = TimeSlot.new
+
     respond_to do |format|
-      format.html { render :layout => "application" }
+      format.html {render :layout => "application" }
     end
   end
 
@@ -13,4 +15,12 @@ class TimeSlotsController < ApplicationController
     @time_slot = @user.time_slots.create(params[:time_slot])
     redirect_to :action => "index"
   end
+
+  def destroy
+    @time_slot = TimeSlot.find(params[:id])
+    @time_slot.destroy
+
+    redirect_to user_time_slots_url(current_user)
+  end
+
 end
