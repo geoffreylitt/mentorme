@@ -1,34 +1,20 @@
+.container
+  .row
+    .span12
+      .stream_container#mentor_container
+        %h2 Mentor
+        .stream.big#mentor_stream
+      .stream_container#translator_container
+        %h2 Translator
+        .stream.small#translator_stream
+      .stream_container#mentee_container
+        %h2 Mentee
+        .stream.big#mentee_stream
 
 :javascript
   var opentok_api_key = "#{@api_key}";
-  var opentok_session_id = "#{@session}";
+  var opentok_session_id = "#{@session_id}";
   var opentok_token = "#{@token}";
+  var user_role = "#{@user_role}"
 
-  TB.addEventListener("exception", exceptionHandler);
-  var session = TB.initSession(opentok_session_id); // Replace with your own session ID. See https://dashboard.tokbox.com/projects
-  session.addEventListener("sessionConnected", sessionConnectedHandler);
-  session.addEventListener("streamCreated", streamCreatedHandler);
-  session.connect(opentok_api_key, opentok_token); // Replace with your API key and token. See https://dashboard.tokbox.com/projects
-                                           // and https://dashboard.tokbox.com/projects
-
-  function sessionConnectedHandler(event) {
-     subscribeToStreams(event.streams);
-     session.publish();
-  }
   
-  function streamCreatedHandler(event) {
-    subscribeToStreams(event.streams);
-  }
-  
-  function subscribeToStreams(streams) {
-    for (i = 0; i < streams.length; i++) {
-      var stream = streams[i];
-      if (stream.connection.connectionId != session.connection.connectionId) {
-        session.subscribe(stream);
-      }
-    }
-  }
-  
-  function exceptionHandler(event) {
-    alert("Exception: " + event.code + "::" + event.message);
-  }

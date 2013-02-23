@@ -1,0 +1,23 @@
+// Place all the styles related to the VideoSession controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.stream_container{
+  float: left;
+  margin: 20px;
+}
+
+.stream{
+  border: solid thin red;
+
+  &.big{
+    width: 300px;
+    height: 200px;
+  }
+
+  &.small{
+    width: 150px;
+    height: 100px;
+  }
+}
+
