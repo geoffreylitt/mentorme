@@ -17,9 +17,19 @@
   %h2
     = "Your upcoming meetings:"
   - @user.meetings.each do |m|
-    - mentor = m.mentor.id == @user.id ? "You" : "#{m.mentor.first_name} #{m.mentor.last_name}"
-    - mentee = m.mentee.id == @user.id ? "You" : "#{m.mentee.first_name} #{m.mentee.last_name}"
-    = "#{m.time} - Mentor: #{mentor}, Mentee: #{mentee}"
+    = "#{m.time} - Mentor: "
+    - if m.mentor.id == @user.id
+      = "You"
+    - else
+      = link_to "#{m.mentor.name}", m.mentor 
+    = ", Mentee: "
+    - if m.mentee.id == @user.id
+      = "You"
+    - else
+      = link_to "#{m.mentee.name}", m.mentee
     - if m.translator
-      - translator = m.translator.id == @user.id ? "You" : "#{m.translator.first_name} #{translator.last_name}"
-      - ", Translator: #{translator}"
+      = ", Translator: "
+      - if m.translator.id == @user.id
+        = "You"
+      - else
+        = link_to "#{m.translator.name}", m.translator
