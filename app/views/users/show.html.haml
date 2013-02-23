@@ -36,6 +36,8 @@
               / everyone else can apply for the slot
               = form_for @meeting do |f|
                 = f.hidden_field :time, :value => ts.time.to_s
+                = f.hidden_field :mentor_id, :value => @user.id
+                = f.hidden_field :mentee_id, :value => current_user.id
                 = f.submit "Apply for this slot"
 
         - if(params[:id] == current_user.id.to_s)

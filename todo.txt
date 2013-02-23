@@ -1,1 +1,5 @@
 - Oops, pushed our opentok API secret to public git. better change that at some point
+
+- fully flesh out taken boolean for timeslots
+
+- meetings endpoint for iOS
