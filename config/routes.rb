@@ -2,7 +2,11 @@ Mentorme::Application.routes.draw do
 
   root :to => "static_pages#home"
 
-  get "videotest" => "meetings#show"
+  resources :meetings do
+    member do
+      get 'show'
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
