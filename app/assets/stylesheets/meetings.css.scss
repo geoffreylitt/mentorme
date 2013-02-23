@@ -2,6 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+h1.name{
+  font-size: 16px;
+  margin: 5px;
+  line-height: 1.5em;
+}
+
+h2.role{
+  font-size: 12px;
+  text-transform: uppercase;
+  margin: 5px;
+  line-height: 1.5em;
+}
+
+
 .video_box{
   position: relative;
 
@@ -17,11 +31,11 @@
 
       &#mentee_container{
         top: 100px;
-        left: 400px;
+        left: 500px;
       }
 
       .stream{
-        width: 400px;
+        width: 450px;
         height: 300px;
       }
 
@@ -30,10 +44,11 @@
     &.small{
 
       &#translator_container{
+        display: none;
         z-index: 5;
 
-        top: 360px;
-        left: 330px;
+        top: 400px;
+        left: 400px;
       }
 
       .stream{

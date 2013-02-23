@@ -47,6 +47,13 @@ $(document).ready(function() {
     function startPublishing() {
       if (!publisher) {
         var $stream_div = $("#" + user_role + "_stream"); // div to append stream to => "#mentor_stream", etc
+
+        if($stream_div.is(":hidden")){
+          //for the translator div, which starts out hidden
+
+          $stream_div.parent().css('display', 'block');
+        }
+
         var $publisher_div = $("<div></div>").attr("id", "opentok_publisher");
 
         $stream_div.append($publisher_div);
@@ -91,6 +98,12 @@ $(document).ready(function() {
           //not myself, okay to subscribe
 
           var $stream_div = $("#" + stream.connection.data + "_stream"); // div to append stream to => "#mentor_stream", etc
+
+          if($stream_div.is(":hidden")){
+            //for the translator div, which starts out hidden
+
+            $stream_div.parent().css("display", "block");
+          }
 
           subscriber_div_id = "stream_" + stream.streamId;
           $stream_div.append("<div id='" + subscriber_div_id + "'></div>");

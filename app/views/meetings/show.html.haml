@@ -3,13 +3,16 @@
     .span12
       .video_box
         .stream_container.big#mentor_container
-          %h2 Mentor
+          %h2.role Mentor
+          %h1.name= @names[:mentor]
           .stream#mentor_stream
         .stream_container.small#translator_container
           .stream#translator_stream
-          %h3 Translator
+          %h2.role Translator
+          %h1.name= @names[:translator]
         .stream_container.big#mentee_container
-          %h2 Mentee
+          %h2.role Mentee
+          %h1.name= @names[:mentee]
           .stream#mentee_stream
 
 :javascript
