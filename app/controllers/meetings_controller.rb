@@ -1,4 +1,7 @@
-class VideoSessionController < ApplicationController
+class MeetingsController < ApplicationController
+  def new
+
+  end
   def show
     api_key = KEYS[:open_tok][:key]        # Replace with your OpenTok API key.
     api_secret = KEYS[:open_tok][:secret]  # Replace with your OpenTok API secret.
@@ -15,8 +18,7 @@ class VideoSessionController < ApplicationController
     #@session = opentok.create_session request.remote_addr, session_properties
 
     @session = "2_MX4yMzAyNzExMn4xMjcuMC4wLjF-RnJpIEZlYiAyMiAxMzo1MDozMiBQU1QgMjAxM34wLjI0MTE3NzU2fg"
-    
-    @token = opentok.generate_token :session_id => @session
 
+    @token = opentok.generate_token :session_id => @session
   end
 end
