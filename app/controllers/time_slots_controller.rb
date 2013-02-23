@@ -4,7 +4,7 @@ class TimeSlotsController < ApplicationController
     @user = User.find(params[:id])
     @time_slots = @user.time_slots
     respond_to do |format|
-      format.html { layout: "application" }
+      format.html { :layout => "application" }
     end
   end
 
