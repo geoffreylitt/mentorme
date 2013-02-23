@@ -1,15 +1,16 @@
 .container
   .row
     .span12
-      .stream_container#mentor_container
-        %h2 Mentor
-        .stream.big#mentor_stream
-      .stream_container#translator_container
-        %h2 Translator
-        .stream.small#translator_stream
-      .stream_container#mentee_container
-        %h2 Mentee
-        .stream.big#mentee_stream
+      .video_box
+        .stream_container.big#mentor_container
+          %h2 Mentor
+          .stream#mentor_stream
+        .stream_container.small#translator_container
+          .stream#translator_stream
+          %h3 Translator
+        .stream_container.big#mentee_container
+          %h2 Mentee
+          .stream#mentee_stream
 
 :javascript
   var opentok_api_key = "#{@api_key}";
