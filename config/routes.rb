@@ -17,6 +17,8 @@ Mentorme::Application.routes.draw do
     resources :meetings
   end
 
+  get "/ios/auth" => "ios#auth_from_fb_uid"
+  
   # first created -> highest priority.
 
   # Sample of regular route:
