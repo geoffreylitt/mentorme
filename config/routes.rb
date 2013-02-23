@@ -1,8 +1,8 @@
 Mentorme::Application.routes.draw do
-  
+
   root :to => "static_pages#home"
 
-  get "videotest" => "video_session#show"
+  get "videotest" => "meetings#show"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
