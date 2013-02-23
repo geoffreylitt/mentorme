@@ -1,2 +1,5 @@
 %h1 Home
 %p Test
+
+- if(!current_user)
+  = link_to "LOGIN!", "/auth/facebook"
