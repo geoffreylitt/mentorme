@@ -11,14 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130223060711) do
-
-  create_table "meetings", :force => true do |t|
-    t.datetime "time"
-    t.string   "opentok_session_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end 
+ActiveRecord::Schema.define(:version => 20130223073926) do
 
   create_table "languages", :force => true do |t|
     t.string   "name"
@@ -32,6 +25,27 @@ ActiveRecord::Schema.define(:version => 20130223060711) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
+  end
+
+  create_table "meetings", :force => true do |t|
+    t.datetime "time"
+    t.string   "opentok_session_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  create_table "mentees", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "meeting_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "mentors", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "meeting_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "skills", :force => true do |t|
@@ -52,6 +66,13 @@ ActiveRecord::Schema.define(:version => 20130223060711) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
+  end
+
+  create_table "translators", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "meeting_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

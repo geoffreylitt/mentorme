@@ -2,6 +2,10 @@ class Meeting < ActiveRecord::Base
   attr_accessible :opentok_session_id, :time
   before_create :populate_session_id
 
+  has_one :mentor
+  has_one :mentee
+  has_one :translator
+
   protected
 
   def populate_session_id
