@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
 
   def authorize
     unless current_user
+      flash[:error] = "Unauthorized action."
       redirect_to root_url
     end
   end

@@ -13,4 +13,13 @@ class TimeSlotsController < ApplicationController
     @time_slot = @user.time_slots.create(params[:time_slot])
     redirect_to :action => "index"
   end
+
+  def new
+    @time_slot = TimeSlot.new
+
+    respond_to do |format|
+      format.html # new.html.haml
+      format.json { render json: @time_slot }
+    end
+  end
 end
