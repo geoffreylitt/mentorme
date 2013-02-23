@@ -2,22 +2,49 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.stream_container{
-  float: left;
-  margin: 20px;
-}
+.video_box{
+  position: relative;
 
-.stream{
-  border: solid thin red;
+  .stream_container{
+    position: absolute;
+    margin: 0;
 
-  &.big{
-    width: 300px;
-    height: 200px;
+    &.big{
+      &#mentor_container{
+        top: 100px;
+        left: 0px;
+      }
+
+      &#mentee_container{
+        top: 100px;
+        left: 400px;
+      }
+
+      .stream{
+        width: 400px;
+        height: 300px;
+      }
+
+    }
+
+    &.small{
+
+      &#translator_container{
+        z-index: 5;
+
+        top: 360px;
+        left: 330px;
+      }
+
+      .stream{
+        width: 150px;
+        height: 100px;
+      }
+    }
   }
 
-  &.small{
-    width: 150px;
-    height: 100px;
+  .stream{
+    border: solid thin red;
+
   }
 }
-

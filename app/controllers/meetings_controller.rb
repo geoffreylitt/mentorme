@@ -8,7 +8,8 @@ class MeetingsController < ApplicationController
     opentok = OpenTok::OpenTokSDK.new api_key, api_secret 
 
     @api_key = api_key #expose api_key
-    @session_id = @meeting.opentok_session_id
+    #@session_id = @meeting.opentok_session_id
+    @session_id = "2_MX4yMzAyNzExMn5-U2F0IEZlYiAyMyAwMDoxODo0MSBQU1QgMjAxM34wLjUxMTA0ODE0fg"
 
     @user_role = params[:myrole] 
     #enable this and make a helper method once we have users

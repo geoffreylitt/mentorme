@@ -52,7 +52,7 @@ $(document).ready(function() {
         $stream_div.append($publisher_div);
 
         //video size determined by the surrounding box's width
-        var publisher_props = {width: $publisher_div.width(), height: $publisher_div.height()};
+        var publisher_props = {width: $stream_div.width(), height: $stream_div.height()};
 
         publisher = TB.initPublisher(opentok_api_key, $publisher_div.attr("id"), publisher_props);  // Pass the replacement div id and properties
         session.publish(publisher);
@@ -71,44 +71,41 @@ $(document).ready(function() {
     //--------------------------------------
 
     function sessionConnectedHandler(event) {
-       subscribeToStreams(event.streams);
-       startPublishing(); 
+      console.log("sessionconnected");
+      subscribeToStreams(event.streams);
+      startPublishing(); 
     }
     
     function streamCreatedHandler(event) {
+      console.log("streamcreated");
       subscribeToStreams(event.streams);
     }
     
     function subscribeToStreams(streams) {
+      console.log("subscribetostreams");
+      console.log(streams.length);
       for (i = 0; i < streams.length; i++) {
+        console.log("one stream");
         var stream = streams[i];
         if (stream.connection.connectionId != session.connection.connectionId) {
           //not myself, okay to subscribe
 
           var $stream_div = $("#" + stream.connection.data + "_stream"); // div to append stream to => "#mentor_stream", etc
-          var $subscriber_div = $("<div></div>").attr("id", stream.streamID);
 
-          $stream_div.append($subscriber_div);
+          subscriber_div_id = "stream_" + stream.streamId;
+          $stream_div.append("<div id='" + subscriber_div_id + "'></div>");
+
+          $subscriber_div = $("#" + subscriber_div_id);
 
           //video size determined by the surrounding box's width
-          var subscriber_props = {width: $subscriber_div.width(), height: $subscriber_div.height()};
+          var subscriber_props = {width: $stream_div.width(), height: $stream_div.height()};
+          subscribers[stream.streamID] = session.subscribe(stream, $subscriber_div.attr("id"), subscriber_props);
 
-          session.subscribe(stream, $subscriber_div.attr("id"), subscriber_props);
+        }
+        else{
+          console.log("rejected myself");
         }
       }
-    }
-
-    //eventually replace addStream entirely!
-    function addStream(stream) {
-      // Check if this is the stream that I am publishing, and if so do not publish.
-      if (stream.connection.connectionId == session.connection.connectionId) {
-        return;
-      }
-      var subscriberDiv = document.createElement('div'); // Create a div for the subscriber to replace
-      subscriberDiv.setAttribute('id', stream.streamId); // Give the replacement div the id of the stream as its id.
-      document.getElementById("subscribers").appendChild(subscriberDiv);
-      var subscriberProps = {width: VIDEO_WIDTH, height: VIDEO_HEIGHT};
-      subscribers[stream.streamId] = session.subscribe(stream, subscriberDiv.id, subscriberProps);
     }
 
 
