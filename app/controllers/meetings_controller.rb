@@ -12,8 +12,12 @@ class MeetingsController < ApplicationController
     @session_id = "2_MX4yMzAyNzExMn5-U2F0IEZlYiAyMyAwMDoxODo0MSBQU1QgMjAxM34wLjUxMTA0ODE0fg"
 
     @user_role = params[:myrole] 
+    @names = {:mentor => "Mr. Wizard", :mentee => "Mr. Edgecase", :translator => "Ms. Takeflightio"}
+
     #enable this and make a helper method once we have users
     #@user_role = current_user.role_in_meeting(@meeting)
+
+    #todo: populate names for real
 
     @token = opentok.generate_token :session_id => @session, :connection_data => @user_role
 
