@@ -1,5 +1,9 @@
 Mentorme::Application.routes.draw do
 
+  scope :constraints => lambda{|req| !req.session[:user_id].blank? } do
+    root to: 'dashboard#index'
+  end
+
   root :to => "static_pages#home"
 
   resources :meetings do
