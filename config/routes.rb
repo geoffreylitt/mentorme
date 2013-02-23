@@ -11,4 +11,8 @@ Mentorme::Application.routes.draw do
   get "videotest" => "meetings#show"
   get '/auth/:provider/callback' => 'sessions#create'
 
+  get "user" => "users#show", :as => "profile"
+  get "user/edit" => "users#edit"
+  put "user" => "users#update"
+
 end
