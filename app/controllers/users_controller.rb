@@ -10,6 +10,11 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @params = params
+    @time_slots = @user.time_slots.sort_by{|ts| ts.time}
+
+    @new_time_slot = TimeSlot.new
+    @meeting = Meeting.new
+
     respond_to do |format|
       format.html {render :layout => "application"}
     end
