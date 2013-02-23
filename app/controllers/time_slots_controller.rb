@@ -11,6 +11,6 @@ class TimeSlotsController < ApplicationController
   def create
     @user = User.find(params[:id])
     @time_slot = @user.time_slots.create(params[:time_slot])
-    redirect_to action: "index"
+    redirect_to :action => "index"
   end
 end
