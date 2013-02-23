@@ -88,7 +88,7 @@ $(document).ready(function() {
           var $stream_div = $("#" + stream.connection.data + "_stream"); // div to append stream to => "#mentor_stream", etc
           var $subscriber_div = $("<div></div>").attr("id", stream.streamID);
 
-          $stream_div.append($publisher_div);
+          $stream_div.append($subscriber_div);
 
           //video size determined by the surrounding box's width
           var subscriber_props = {width: $subscriber_div.width(), height: $subscriber_div.height()};
