@@ -1,9 +1,5 @@
 - Oops, pushed our opentok API secret to public git. better change that at some point
-
 - fully flesh out taken boolean for timeslots
-
 - meetings endpoint for iOS
-
 - make a dashboard controller to take over for the dashboard from users/index?
-
 - prevent people from accessing meetings they're not in -- NOT JUST AN EDGE CASE!
