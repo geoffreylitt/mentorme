@@ -1,7 +1,8 @@
 class StaticPagesController < ApplicationController
+  skip_filter :authorize
 
-def home
+  def home
 
-end
+  end
 
 end

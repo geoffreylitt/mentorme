@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :time_slots
 
   def self.from_omniauth(auth)
-    where(auth["uid"]).first || create_from_omniauth(auth)
+    User.find_by_fb_uid(auth["uid"]) || create_from_omniauth(auth)
   end
   
   def self.create_from_omniauth(auth)
