@@ -1,0 +1,17 @@
+.container
+  .row
+    .span12
+      %h1 Timeslots
+      %h2 Current timeslots
+
+      %ul
+      - @time_slots.each do |ts|
+        %li
+          = ts.time.strftime("%a, %B %d -- %H:%M") + " - " + (ts.time + 15.minutes).strftime("%H:%M")
+          = link_to "Delete timeslot", user_time_slot_path(current_user, ts), :method => :delete, :data => {:confirm => "Are you sure?"}
+
+      %h3 Indicate that you are free for 15 minutes, starting from this time:
+      = form_for [:user, @new_time_slot] do |f|
+        = f.datetime_select :time, :minute_step => 15, :start_year => 2013
+        %br
+        = f.submit :class => "btn btn-primary"
