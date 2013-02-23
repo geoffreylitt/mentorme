@@ -1,5 +1,16 @@
 class MeetingsController < ApplicationController
-   def show
+
+  def create
+    @meeting = Meeting.new(params[:meeting])
+
+    if @meeting.save
+      redirect_to root_url, :notice => 'Meeting successfully scheduled at ' + @meeting.time.strftime("%a, %B %d -- %H:%M")
+    else
+      render action: "new"
+    end
+  end
+
+  def show
     @meeting = Meeting.find(params[:id])
 
     api_key = KEYS[:open_tok][:key]
@@ -21,5 +32,6 @@ class MeetingsController < ApplicationController
 
     @token = opentok.generate_token :session_id => @session, :connection_data => @user_role
 
-     end
+  end
+
 end

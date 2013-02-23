@@ -7,4 +7,12 @@
   = javascript_include_tag "http://static.opentok.com/v1.1/js/TB.min.js"
   = csrf_meta_tags
 %body{:data => {:controller => controller.controller_name, :action => controller.action_name}}
-  = yield
+  #main{:role => "main"}
+    .container
+      .content
+        .row
+          .span12
+            = render 'layouts/header'
+            = render 'layouts/messages'
+            = yield
+          %footer
