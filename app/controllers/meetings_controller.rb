@@ -3,7 +3,7 @@ class MeetingsController < ApplicationController
   def index
     @meetings = User.find(params[:user_id]).meetings
 
-
+    render :json => @meetings.to_json(:methods => [:mentor_name, :mentee_name, :translator_name])
   end
 
   def create
