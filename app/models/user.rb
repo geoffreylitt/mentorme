@@ -7,9 +7,11 @@ class User < ActiveRecord::Base
   has_many :time_slots
 
   def meetings
-    Meeting.where(:mentor_id => params[:id])
-    + Meeting.where(:translator_id => params[:id])
-    + Meeting.where(:mentee_id => params[:id])
+    meetings = []
+    meetings << Meeting.where(:mentor_id => self.id)
+    meetings << Meeting.where(:translator_id => self.id)
+    meetings << Meeting.where(:mentee_id => self.id).all
+    meetings.flatten
   end
 
   def self.from_omniauth(auth)
