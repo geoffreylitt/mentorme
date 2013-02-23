@@ -5,7 +5,7 @@
 - matches = @matches.first(5)
 - matches.each do |match|
   - user = User.find(match.first.to_i)
-  = link_to "#{user.first_name} #{user.last_name}", user
+  = link_to "#{user.name}", user
   = "Skills: "
   - user.teach_skills.each do |t|
     = Skill.find(t.skill_id).name
@@ -13,6 +13,7 @@
   - user.languages.each do |l|
     = l.name
   %br 
+
 - if @user.meetings
   %h2
     = "Your upcoming meetings:"
@@ -33,3 +34,21 @@
         = "You"
       - else
         = link_to "#{m.translator.name}", m.translator
+
+
+/todo: only show this part if the user can translate
+
+%h2 Meetings that need translating
+
+- if @translate_meetings.empty?
+  %p No meetings currently need translation!
+
+- else  
+  %ul
+    - @translate_meetings.each do |tm|
+      %li
+        = tm.time.strftime("%a, %B %d -- %H:%M") + " - " + (tm.time + 15.minutes).strftime("%H:%M")
+        = form_for tm do |f|
+          = f.hidden_field :translator_id, :value => current_user.id
+          = f.submit "Translate this meeting"
+

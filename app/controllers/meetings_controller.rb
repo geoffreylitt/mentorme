@@ -16,6 +16,16 @@ class MeetingsController < ApplicationController
     end
   end
 
+  def update
+    @meeting = Meeting.find(params[:id])
+
+    if @meeting.update_attributes(params[:meeting])
+      redirect_to root_url, :notice => 'Successfully applied to translate meeting'
+    else
+      redirect_to root_url, :error => 'Sorry, something went wrong. Please try again.'
+    end
+  end 
+
   def show
     @meeting = Meeting.find(params[:id])
 
