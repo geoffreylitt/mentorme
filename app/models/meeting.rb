@@ -29,7 +29,11 @@ class Meeting < ActiveRecord::Base
   end
 
   def translator_name
-    self.translator.name
+    if(self.translator.nil?)
+      return ""
+    else
+      return self.translator.name
+    end
   end
 
   protected

@@ -6,6 +6,10 @@ class User < ActiveRecord::Base
   has_many :teach_skills
   has_many :time_slots
 
+  def name
+    first_name + ' ' + last_name
+  end
+  
   def meetings
     meetings = []
     meetings << Meeting.where(:mentor_id => self.id)
