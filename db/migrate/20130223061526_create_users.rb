@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email
       t.string :image
       t.string :location
-      t.int :timezone
+      t.integer :timezone
       t.string :bio
 
       t.timestamps
