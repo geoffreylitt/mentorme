@@ -3,5 +3,11 @@
 %br
 - @matches.each do |match|
   - user = User.find(match.first.to_i)
-  = "#{user.first_name} #{user.last_name}"
+  = link_to "#{user.first_name} #{user.last_name}", user
+  = "Skills: "
+  - user.teach_skills.each do |t|
+    = Skill.find(t.skill_id).name
+  = "Languages: "
+  - user.languages.each do |l|
+    = l.name
   %br 
