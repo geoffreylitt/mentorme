@@ -31,15 +31,15 @@ class ApplicationController < ActionController::Base
   end
 
   #geoffrey's stupid local workaround
-
+=begin
   def authorize
   end
 
   def current_user
     User.find(1)
   end
+=end
 
-=begin
   def authorize
     unless current_user
       redirect_to root_url
@@ -49,5 +49,5 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
-=end
+  
 end
