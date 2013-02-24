@@ -167,10 +167,6 @@ $(document).ready(function() {
         $(this).siblings("span.message").text("Need for speed?")
         $(this).text("Turn video on");
       }
-
-
-
-      $(this).siblings("")
     });
 
   }
