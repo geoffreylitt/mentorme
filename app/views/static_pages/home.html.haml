@@ -16,6 +16,8 @@
         %h2 Connect with mentors
         %h2.subheading Professional advice, from anywhere in the world.
       .span4.offset1
-        .large-button
-          %img.fb{:src => "/assets/fb.png"}
-          = link_to "Login with Facebook", "/auth/facebook"
+        = link_to "/auth/facebook" do
+          .large-button
+            %img.fb{:src => "/assets/fb.png"}
+            Login with Facebook
+          
