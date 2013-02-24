@@ -31,19 +31,19 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-    User.find_by_fb_uid(auth["uid"]) || create_from_omniauth(auth)
+    User.find_by_fb_uid(auth["uid"]) || new_from_omniauth(auth)
   end
   
-  def self.create_from_omniauth(auth)
-    create! do |user|
-      user.fb_uid = auth["uid"]
-      user.first_name = auth["info"]["first_name"]
-      user.last_name = auth["info"]["last_name"]
-      user.email = auth["info"]["email"]
-      user.image = auth["info"]["image"]
-      user.location = auth["info"]["location"]
-      user.timezone = auth["extra"]["raw_info"]["timezone"]
-    end
+  def self.new_from_omniauth(auth)
+    User.new(
+      fb_uid: auth["uid"],
+      first_name: auth["info"]["first_name"],
+      last_name: auth["info"]["last_name"],
+      email: auth["info"]["email"],
+      image: auth["info"]["image"],
+      location: auth["info"]["location"],
+      timezone: auth["extra"]["raw_info"]["timezone"]
+    )
   end
 
   def matches
