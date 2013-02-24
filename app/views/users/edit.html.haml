@@ -1,15 +1,14 @@
-%h1= "Edit %s %s" % [ @user.first_name, @user.last_name ]
+%h1= "Edit #{@user.name}" 
 
 = form_tag :action => :update do
   = "Bio"
   = text_field_tag 'bio', @user.bio
   %br
   = "Languages you speak:"
-  - ids = @user.languages.map{ |ul| ul.name }
-  = "English"
-  = check_box_tag "languages[]", "English", ids.include?("English")
-  = "Arabic"
-  = check_box_tag "languages[]", "Arabic", ids.include?("Arabic")
+  - ids = @user.languages.map{ |ul| ul.id }
+  - Language.all.each do |l|
+    = "#{l.name}"
+    = check_box_tag "languages[]", "#{l.id}", ids.include?(l.id)
   %br
   = "Skills you want to learn:"
   - learn_skills = @user.learn_skills.map{ |ls| ls.skill_id }

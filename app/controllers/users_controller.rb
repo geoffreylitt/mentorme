@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     @user.languages = []
     if params[:languages]
       params[:languages].each do |language|
-        @user.languages << Language.create(:name => language)
+        @user.languages << Language.find(language)
       end
       params[:languages] = nil
     end

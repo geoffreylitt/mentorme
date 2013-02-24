@@ -7,19 +7,12 @@ class User < ActiveRecord::Base
   has_many :time_slots
 
   def name
-    first_name + ' ' + (last_name || '')
+    "#{first_name} #{last_name}"
   end
   
   def language_list
-    list = ""
-    self.languages.each_with_index do |l,i|
-      if i == 0
-        list << l.name
-      else
-        list << ", #{l.name}"
-      end
-    end
-    list
+    names = self.languages.map(&:name)
+    list = names.join(',')
   end
 
   def bilingual?

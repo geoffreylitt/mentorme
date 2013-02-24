@@ -17,7 +17,7 @@
           = "Skills: "
           - user.teach_skills.each do |t|
             = Skill.find(t.skill_id).name
-  .span4
+    .span4
     .row
       .span4
         - if @user.meetings
