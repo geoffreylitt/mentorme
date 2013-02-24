@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @params = params
-    @time_slots = @user.time_slots.where(taken: false).reject{|t| t.time < Time.now}.sort_by{|ts| ts.time}
+    @time_slots = @user.upcoming_available_time_slots.sort_by{|ts| ts.time}
 
     @new_time_slot = TimeSlot.new
     @meeting = Meeting.new
@@ -57,7 +57,7 @@ class UsersController < ApplicationController
     end
     respond_to do |format|
       if @user.update_attributes(params[:user])
-      	format.html { redirect_to action: "show" }
+      	format.html { redirect_to dashboard_path }
       else
         render 'edit'
       end

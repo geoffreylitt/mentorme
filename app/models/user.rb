@@ -35,6 +35,9 @@ class User < ActiveRecord::Base
     meetings.reject { |m| m.time < Time.now }
   end
 
+  def upcoming_available_time_slots
+    time_slots.where(taken: false).reject { |time_slot| time_slot.time < Time.now }
+  end
 
   def self.from_omniauth(auth)
     User.find_by_fb_uid(auth["uid"]) || new_from_omniauth(auth)
