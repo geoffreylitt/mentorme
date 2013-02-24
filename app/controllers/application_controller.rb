@@ -24,7 +24,13 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
+  around_filter :user_time_zone, :if => :current_user
+
   private
+  
+  def user_time_zone(&block)
+    Time.use_zone(current_user.timezone, &block)
+  end
 
   def authorize
     unless current_user
