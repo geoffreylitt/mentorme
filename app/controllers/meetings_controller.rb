@@ -3,9 +3,27 @@ class MeetingsController < ApplicationController
   skip_before_filter :authorize, :only => :index
 
   def index
-    @meetings = User.find(params[:user_id]).meetings
+    meetings = User.find(params[:user_id]).meetings
+    response = Array.new
 
-    render :json => @meetings.to_json(:methods => [:mentor_name, :mentee_name, :translator_name, :unix_timestamp])
+    meetings.each do |meeting|
+      meeting_hash = Hash.new
+      meeting_hash[:id] = meeting.id
+      meeting_hash[:mentor_name] = meeting.mentor.name
+      meeting_hash[:mentee_name] = meeting.mentee.name
+      if meeting.translator.nil?
+        meeting_hash[:translator_name] = ""
+      else
+        meeting_hash[:translator_name] = meeting.translator.name
+      end
+      meeting_hash[:unix_timestamp] = meeting.unix_timestamp
+      meeting_hash[:opentok_session_id] = meeting.opentok_session_id
+      meeting_hash[:opentok_token] = meeting.token_for(params[:user_id])
+
+      response << meeting_hash
+    end
+
+    render :json => response.to_json
   end
 
   def create
@@ -34,17 +52,11 @@ class MeetingsController < ApplicationController
   def show
     @meeting = Meeting.find(params[:id])
 
-    api_key = KEYS[:open_tok][:key]
-    api_secret = KEYS[:open_tok][:secret]
-
-    opentok = OpenTok::OpenTokSDK.new api_key, api_secret 
-
-    @api_key = api_key #expose api_key
+    @api_key = KEYS[:open_tok][:key]
+    
     @session_id = @meeting.opentok_session_id
-
-    @user_role = @meeting.role(current_user) 
-
-    @token = opentok.generate_token :session_id => @session, :connection_data => @user_role
+    @user_role = @meeting.role(current_user)
+    @token = @meeting.token_for(current_user)
 
     @shared_interests = @meeting.mentor.skill_overlap_with @meeting.mentee
 

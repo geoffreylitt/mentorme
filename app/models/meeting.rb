@@ -48,6 +48,15 @@ class Meeting < ActiveRecord::Base
     self.time.to_i
   end
 
+  def token_for(user)
+    api_key = KEYS[:open_tok][:key]
+    api_secret = KEYS[:open_tok][:secret] 
+
+    opentok = OpenTok::OpenTokSDK.new api_key, api_secret 
+    token = opentok.generate_token :session_id => self.opentok_session_id, :connection_data => self.role(user)
+    token
+  end
+
   protected
 
   def populate_session_id
@@ -60,4 +69,8 @@ class Meeting < ActiveRecord::Base
     opentok_session = opentok.create_session session_properties
     self.opentok_session_id = opentok_session.session_id
   end
+
+  def populate_titanpad_id
+  end
+
 end
