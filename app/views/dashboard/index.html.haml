@@ -58,7 +58,7 @@
             .title
               %h2 Translation Needed
             .mcontent
-              - @translate_meetings.each do |tm|
+              - @translate_meetings.reject{ |m| m.time < Time.now }.reject{ |m| m.mentor_id == @user.id || m.mentee_id == @user.id}.each do |tm|
                 .mitem
                   %h4
                     %span.highlight= tm.relative_day
