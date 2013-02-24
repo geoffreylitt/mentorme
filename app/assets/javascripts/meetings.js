@@ -93,7 +93,6 @@ $(document).ready(function() {
       console.log("subscribetostreams");
       console.log(streams.length);
       for (i = 0; i < streams.length; i++) {
-        console.log("one stream");
         var stream = streams[i];
         if (stream.connection.connectionId != session.connection.connectionId) {
           //not myself, okay to subscribe
