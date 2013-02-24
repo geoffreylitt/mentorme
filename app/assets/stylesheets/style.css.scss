@@ -13,6 +13,10 @@ body {
 #main {
   border-top: 4px solid #e3e3e3;
   padding: 20px 0;
+
+  h2 {
+    margin-top: 0;
+  }
 }
 
 h2, h3 {
@@ -134,4 +138,84 @@ input.button {
   background: #3e495d;
   border-radius: 3px;
   padding: 10px 20px;
+}
+
+.joinbutton{
+  background: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 900;
+  display: block;
+  width: 35px;
+}
+
+.showprofile .mentorbox {
+  height: 250px;
+  .profile {
+    max-width: 250px;
+  }
+  .info {
+    margin-left: 40px;
+  }
+  h3 {
+    font-size: 40px;
+    line-height: 50px;
+  }
+  .attributes {
+    font-size: 15px;
+    font-weight: 900;
+  }
+
+  .skills {
+    display: inline;
+  }
+
+  .skillitem {
+    font-size: 14px;
+  }
+
+}
+
+.skills {
+  margin-top: 20px;
+}
+
+.skillitem {
+  display: inline;
+  background: darkgray;
+  padding: 5px 10px;
+  margin-right: 10px;
+  border-radius: 5px;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 12px;
+}
+
+.mentor-link {
+  background: #3e495d;
+  padding: 4px 8px;
+  color: white;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-left: 30px;
+}
+
+.timebox {
+  background: #f8f8f8;
+  margin-right: 20px;
+  border-radius: 5px;
+  float: left;
+  padding: 0 20px;
+  width: 410px;
+  margin-bottom: 5px;
+}
+
+.mid {
+  color: gray;
+}
+
+.gray {
+  background: lightgray;
 }

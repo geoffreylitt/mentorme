@@ -1,50 +1,47 @@
-.container
-  .row
-    .span12
+.showprofile
+  .mentorbox
+    %img.profile{:src => "#{@user.image}?width=250&height=250"}
+    .info
+      %h3= link_to @user.name, @user
+      %p.attributes
+        %i.icon-globe
+        = @user.location
+        %i.icon-bullhorn
+        = @user.language_list
+      %h5 Can teach
+      .skills
+        - @user.teach_skills.each do |t|
+          .skillitem
+            = Skill.find(t.skill_id).name
+      %h5 Wants to learn
+      .skills
+        - @user.learn_skills.each do |t|
+          .skillitem
+            = Skill.find(t.skill_id).name
+  %h2 Available meetings
+  - @time_slots.each do |ts|
+    .timebox
+      %h4
+        = ts.time.strftime("%A, %B %d")
+        %span.start= ts.time.strftime("%H:%M")
+        %span.mid to
+        %span.end= (ts.time + 15.minutes).strftime("%H:%M")
 
-      %h1= "%s %s's profile" % [ @user.first_name, @user.last_name ]
+      - if(params[:id] != current_user.id.to_s)
+        / everyone else can apply for the slot
+        = form_for @meeting do |f|
+          = f.hidden_field :time_slot_id, :value => ts.id
+          = f.hidden_field :time, :value => ts.time.to_s
+          = f.hidden_field :mentor_id, :value => @user.id
+          = f.hidden_field :mentee_id, :value => current_user.id
+          = f.submit "Book Meeting", :class => "button"
 
-      = "Bio:"
-      = @user.bio
-      %br
-
-      = "Languages:"
-      - @user.languages.each do |l|
-        = l.name
-      %br
-      = "Skills you want to learn:"
-      - @user.learn_skills.each do |ls|
-        - s = Skill.find(ls.skill_id)
-        = s.name
-      %br
-      = "Skills you have:"
-      -@user.teach_skills.each do |ts|
-        - s = Skill.find(ts.skill_id)
-        = s.name
-      %br
-
-      %h2 Current available timeslots
-
-      %ul
-        - @time_slots.each do |ts|
-          %li
-            = ts.time.strftime("%a, %B %d -- %H:%M") + " - " + (ts.time + 15.minutes).strftime("%H:%M")
-            - if(params[:id] == current_user.id.to_s)
-              / only allow current user to delete a timeslot
-              = link_to "Delete timeslot", user_time_slot_path(@user, ts), :method => :delete, :data => {:confirm => "Are you sure?"}
-            - else
-              / everyone else can apply for the slot
-              = form_for @meeting do |f|
-                = f.hidden_field :time_slot_id, :value => ts.id
-                = f.hidden_field :time, :value => ts.time.to_s
-                = f.hidden_field :mentor_id, :value => @user.id
-                = f.hidden_field :mentee_id, :value => current_user.id
-                = f.submit "Apply for this slot"
-
-        - if(params[:id] == current_user.id.to_s)
-          /I can add timeslots to my own profile
-          %h3 Add a slot: Indicate that you are free for 15 minutes, starting from this time
-          = form_for [@user, @new_time_slot] do |f|
-            = f.datetime_select :time, :minute_step => 15, :start_year => 2013
-            %br
-            = f.submit :class => "btn btn-primary"
+  %div{:style => "clear: both;"}
+  - if(params[:id] == current_user.id.to_s)
+    /I can add timeslots to my own profile
+    .row
+      %h3 Add a meeting
+      = form_for [@user, @new_time_slot] do |f|
+        = f.datetime_select :time, :minute_step => 15, :start_year => 2013
+        %br
+        = f.submit :class => "button"

@@ -8,15 +8,19 @@
       .mentorbox
         %img.profile{:src => "#{user.image}?width=120&height=120"}
         .info
-          %h3= link_to user.name, user
+          %h3
+            = link_to user do
+              = user.name
+              %span.mentor-link Book a meeting
           %p.attributes
             %i.icon-globe
             = user.location
             %i.icon-bullhorn
             = user.language_list
-          = "Skills: "
-          - user.teach_skills.each do |t|
-            = Skill.find(t.skill_id).name
+          .skills
+            - user.teach_skills.each do |t|
+              .skillitem
+                = Skill.find(t.skill_id).name
   .span4
     .row
       .span4
@@ -50,7 +54,7 @@
                         = link_to m.translator.name, m.translator
                         %span.type , Translator
                   - if m.time < Time.now + 30.minutes
-                    = link_to "Join!", m 
+                    = link_to "Join", m, :class => "joinbutton"
     .row
       .span4
         - if !@translate_meetings.empty? and current_user.bilingual?

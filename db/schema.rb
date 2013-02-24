@@ -57,10 +57,10 @@ ActiveRecord::Schema.define(:version => 20130224110156) do
 
   create_table "time_slots", :force => true do |t|
     t.datetime "time"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.integer  "user_id"
-    t.boolean  "taken"
+    t.boolean  "taken",      :default => false
   end
 
   create_table "users", :force => true do |t|

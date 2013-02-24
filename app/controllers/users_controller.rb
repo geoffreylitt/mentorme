@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @params = params
-    @time_slots = @user.time_slots.where(taken: false).sort_by{|ts| ts.time}
+    @time_slots = @user.time_slots.where(taken: false).reject{|t| t.time < Time.now}.sort_by{|ts| ts.time}
 
     @new_time_slot = TimeSlot.new
     @meeting = Meeting.new

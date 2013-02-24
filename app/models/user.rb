@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   
   def language_list
     names = self.languages.map(&:name)
-    list = names.join(',')
+    list = names.join(' / ')
   end
 
   def bilingual?

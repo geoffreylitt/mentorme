@@ -20,7 +20,7 @@
           %label.control-label
             Skills 
             %br
-            %span.muted To learn
+            %span.muted Want to learn
           .controls
             - learn_skills = @user.learn_skills.map{ |ls| ls.skill_id }
             - @skills.each do |s|
@@ -33,7 +33,7 @@
           %label.control-label
             Skills 
             %br
-            %span.muted To teach
+            %span.muted Can teach
           .controls
             - teach_skills = @user.teach_skills.map{ |ts| ts.skill_id }
             - @skills.each do |s|

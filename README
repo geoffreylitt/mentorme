@@ -1,0 +1,12 @@
+Hello, world.
+
+(1) Install Ruby 1.9.2.
+(2) Clone git repository to local machine.
+(3) Create a Facebook application.
+  (a) Set callback URL to localhost:3000/auth/facebook/callback.
+(4) Create an OpenTok application.
+(5) Insert API keys into config/secrets.yml.
+(6) Navigate to application folder in terminal.
+(7) "bundle install" will install Rails and all gem dependencies.
+(8) "rails server" will start the Rails server.
+(9) Browse to http://localhost:3000.

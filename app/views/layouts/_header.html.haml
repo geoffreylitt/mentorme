@@ -10,8 +10,7 @@
           %li.logout
             = link_to "Logout", "/logout"
           %li
-            = link_to current_user.name, @user
-          %li
+            = link_to current_user.name, current_user
+          %li.gray
             %span.badge.badge-white= current_user.meetings.count
-            = link_to "Meetings", "#"
-            %i.icon-chevron-down.icon-white
+            Meetings
