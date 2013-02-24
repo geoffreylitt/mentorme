@@ -28,11 +28,11 @@ class User < ActiveRecord::Base
   end
 
   def meetings_within_half_hour
-    meetings.reject { |m| m.time < Time.now + 30.minutes } 
+    meetings.reject { |m| m.time < Time.now || m.time > Time.now + 30.minutes } 
   end
 
   def upcoming_meetings
-    meetings.reject { |m| m.time > Time.now }
+    meetings.reject { |m| m.time < Time.now }
   end
 
 
