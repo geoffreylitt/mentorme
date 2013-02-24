@@ -38,7 +38,6 @@ class MeetingsController < ApplicationController
     @session_id = @meeting.opentok_session_id
 
     @user_role = @meeting.role(current_user) 
-    @names = {:mentor => @meeting.mentor_name, :mentee => @meeting.mentee_name, :translator => @meeting.translator_name}
 
     #enable this and make a helper method once we have users
     #@user_role = current_user.role_in_meeting(@meeting)

@@ -16,8 +16,6 @@
 #    \    /\    /    |  |   /  /----./  _____  \  |  |\  \----.|  '--'  |                       
 #     \__/  \__/     |__|  /________/__/     \__\ | _| `._____||_______/                        
                                                                        
-
-
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :authorize
@@ -32,6 +30,16 @@ class ApplicationController < ActionController::Base
     Time.use_zone(current_user.timezone, &block)
   end
 
+  #geoffrey's stupid local workaround
+
+  def authorize
+  end
+
+  def current_user
+    User.find(1)
+  end
+
+=begin
   def authorize
     unless current_user
       redirect_to root_url
@@ -41,4 +49,5 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
+=end
 end

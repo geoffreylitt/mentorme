@@ -9,6 +9,7 @@ $(document).ready(function() {
     var session;
     var publisher;
     var subscribers = {};
+    var video_enabled = true;
 
     TB.addEventListener("exception", exceptionHandler);
     
@@ -146,6 +147,31 @@ $(document).ready(function() {
     function exceptionHandler(event) {
       alert("Exception: " + event.code + "::" + event.message);
     }
+
+    $("a#video_toggle").click(function(){
+      video_enabled = video_enabled ? false : true; //switch video_enabled
+
+      publisher.publishVideo(video_enabled);
+      for (var sub in subscribers) {
+        if (!subscribers.hasOwnProperty(sub)) {
+            continue;
+        }
+      sub.subscribeToVideo(video_enabled);
+      }
+
+      if(video_enabled){
+        $(this).siblings("span.message").text("Not enough bandwidth?")
+        $(this).text("Turn video off");
+      }
+      else{
+        $(this).siblings("span.message").text("Need for speed?")
+        $(this).text("Turn video on");
+      }
+
+
+
+      $(this).siblings("")
+    });
 
   }
 

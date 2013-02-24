@@ -23,6 +23,8 @@ Mentorme::Application.routes.draw do
   end
 
   post "/ios/auth" => "ios#auth_from_fb_uid"
+
+  get "/dashboard" => "dashboard#index"
   
   # first created -> highest priority.
 
