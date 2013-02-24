@@ -1,5 +1,7 @@
 class MeetingsController < ApplicationController
 
+  skip_before_filter :authorize, :only => :index
+
   def index
     @meetings = User.find(params[:user_id]).meetings
 
