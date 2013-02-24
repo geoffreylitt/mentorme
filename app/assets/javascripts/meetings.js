@@ -150,14 +150,6 @@ $(document).ready(function() {
     $("a#video_toggle").click(function(){
       video_enabled = video_enabled ? false : true; //switch video_enabled
 
-      publisher.publishVideo(video_enabled);
-      for (var sub in subscribers) {
-        if (!subscribers.hasOwnProperty(sub)) {
-            continue;
-        }
-      sub.subscribeToVideo(video_enabled);
-      }
-
       if(video_enabled){
         $(this).siblings("span.message").text("Not enough bandwidth?")
         $(this).text("Turn video off");
@@ -166,6 +158,18 @@ $(document).ready(function() {
         $(this).siblings("span.message").text("Need for speed?")
         $(this).text("Turn video on");
       }
+
+      publisher.publishVideo(video_enabled);
+
+      for (var sub in subscribers) {
+        if (!subscribers.hasOwnProperty(sub)) {
+            continue;
+        }
+        if (typeof sub.subscribeToVideo === 'function'){
+          sub.subscribeToVideo(video_enabled);
+        }
+      }
+
     });
 
   }
