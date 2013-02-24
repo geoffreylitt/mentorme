@@ -9,8 +9,11 @@ class MeetingsController < ApplicationController
   end
 
   def create
+    ts = TimeSlot.find(params[:meeting][:time_slot_id])
+    ts.taken = true
+    ts.save
+    params[:meeting].delete(:time_slot_id)
     @meeting = Meeting.new(params[:meeting])
-
     if @meeting.save
       redirect_to root_url, :notice => 'Meeting successfully scheduled at ' + @meeting.time.strftime("%a, %B %d -- %H:%M")
     else

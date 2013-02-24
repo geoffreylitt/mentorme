@@ -1,5 +1,5 @@
 class Meeting < ActiveRecord::Base
-  attr_accessible :opentok_session_id, :time, :mentor_id, :mentee_id, :translator_id
+  attr_accessible :opentok_session_id, :time, :mentor_id, :mentee_id, :translator_id, :time_slot_id
   before_create :populate_session_id, :populate_titanpad_id
 
   belongs_to :mentor, :class_name => "User"
