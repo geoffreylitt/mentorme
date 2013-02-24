@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
     list
   end
 
+  def bilingual?
+    self.languages.count == 2
+  end
+
   def meetings
     meetings = []
     meetings << Meeting.where(:mentor_id => self.id)

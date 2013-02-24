@@ -40,28 +40,29 @@
                       %span.type , Mentor
                   - unless m.mentee.id == @user.id
                     .mprofile
-                      %img{:src => "#{m.mentor.image}?width=30&height=30"}
+                      %img{:src => "#{m.mentee.image}?width=30&height=30"}
                       = link_to m.mentee.name, m.mentee
                       %span.type , Mentee
                   - if m.translator
                     - unless m.translator.id == @user.id
                       .mprofile
-                        %img{:src => "#{m.mentor.image}?width=30&height=30"}
+                        %img{:src => "#{m.translator.image}?width=30&height=30"}
                         = link_to m.translator.name, m.translator
                         %span.type , Translator
     .row
       .span4
-        %h2 Meetings that need translating
-
-        - if @translate_meetings.empty?
-          %p No meetings currently need translation!
-
-        - else  
-          %ul
-            - @translate_meetings.each do |tm|
-              %li
-                = tm.time.strftime("%a, %B %d -- %H:%M") + " - " + (tm.time + 15.minutes).strftime("%H:%M")
-                = form_for tm do |f|
-                  = f.hidden_field :translator_id, :value => current_user.id
-                  = f.submit "Translate this meeting"
+        - if !@translate_meetings.empty? and current_user.bilingual?
+          .meetingsbox
+            .title
+              %h2 Translation Needed
+            .mcontent
+              - @translate_meetings.each do |tm|
+                .mitem
+                  %h4
+                    %span.highlight= tm.relative_day
+                    at
+                    %span.highlight= tm.hour
+                  = form_for tm do |f|
+                    = f.hidden_field :translator_id, :value => current_user.id
+                    = f.submit "Translate this meeting"
 

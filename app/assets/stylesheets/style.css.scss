@@ -2,6 +2,10 @@ h2 {
   font-size: 24px;
 }
 
+.alert {
+  border: none;
+}
+
 body {
   font-family: 'Lato';
 }
@@ -22,6 +26,7 @@ h2, h3 {
 }
 
 .mentorbox {
+  margin-bottom: 100px;
   height: 120px;
   border-radius: 5px;
   overflow: hidden;
@@ -62,6 +67,11 @@ h2, h3 {
   background: #3b3e42;
   border-radius: 5px;
   overflow: hidden;
+  margin-bottom: 30px;
+
+  form {
+    margin: 0;
+  }
 
   a, a:visited, a:hover, a:active {
     color: inherit;
@@ -96,6 +106,7 @@ h2, h3 {
 
   .mprofile {
     color: white;
+    margin-bottom: 10px;
     .type {
       color: lightgray;
     }
