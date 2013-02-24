@@ -44,6 +44,10 @@ class Meeting < ActiveRecord::Base
     end
   end
 
+  def unix_timestamp
+    self.time.to_i
+  end
+
   protected
 
   def populate_session_id
