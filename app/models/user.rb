@@ -27,6 +27,15 @@ class User < ActiveRecord::Base
     meetings.flatten
   end
 
+  def meetings_within_half_hour
+    meetings.reject { |m| m.time < Time.now + 30.minutes } 
+  end
+
+  def upcoming_meetings
+    meetings.reject { |m| m.time > Time.now }
+  end
+
+
   def self.from_omniauth(auth)
     User.find_by_fb_uid(auth["uid"]) || new_from_omniauth(auth)
   end

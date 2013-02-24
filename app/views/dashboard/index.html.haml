@@ -25,7 +25,7 @@
             .title
               %h2 Upcoming Meetings
             .mcontent
-              - @user.meetings.reject{ |m| m.time < Time.now }.each do |m|
+              - @user.upcoming_meetings.each do |m|
                 .mitem
                   %h4
                     %span.highlight= m.relative_day
