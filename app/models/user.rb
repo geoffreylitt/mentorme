@@ -1,13 +1,13 @@
 class User < ActiveRecord::Base
   attr_accessible :bio, :email, :fb_uid, :first_name, :image, :last_name, :location, :timezone, :languages
 
-  has_many :languages
+  has_and_belongs_to_many :languages
   has_many :learn_skills
   has_many :teach_skills
   has_many :time_slots
 
   def name
-    first_name + ' ' + last_name
+    first_name + ' ' + (last_name || '')
   end
   
   def language_list
@@ -53,13 +53,13 @@ class User < ActiveRecord::Base
   def matches
     matches = []    
     scores = {}
-    ls = self.learn_skills.map{ |s| s.skill_id }
-    l = self.languages.map{ |ls| ls.name}
+    ls = self.learn_skills.map(&:skill_id)
+    l = self.languages.map(&:id) 
     users = User.all
     users.reject!{ |u| u.id == self.id }
     users.each do |u|
-      ts = u.teach_skills.map{ |s| s.skill_id }
-      ul = u.languages.map{ |ls| ls.name }
+      ts = u.teach_skills.map(&:skill_id)
+      ul = u.languages.map(&:id)
       skill_intersect = (ts & ls).count
       language_intersect = (l & ul).count
       score = skill_intersect + language_intersect * 5
