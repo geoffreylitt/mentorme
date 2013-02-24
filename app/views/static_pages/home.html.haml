@@ -3,12 +3,19 @@
     .row
       .span12
         %h1 TakeFlight
+        .mockups
+          %img.left{:src => "/assets/alex.png"}
+          .bubbles.hide
+            %img.bubble-left{:src => "/assets/bubble-left.png"}
+            %img.bubble-right{:src => "/assets/bubble-right.png"}
+          %img.right{:src => "/assets/ramsey.png"}
 #hero
   .container
     .row
       .span7
         %h2 Connect with mentors
-        %h3 Professional advice, from anywhere in the world.
-        %p Connec
+        %h2.subheading Professional advice, from anywhere in the world.
       .span4.offset1
-        = link_to "LOGIN!", "/auth/facebook"
+        .large-button
+          %img.fb{:src => "/assets/fb.png"}
+          = link_to "Login with Facebook", "/auth/facebook"

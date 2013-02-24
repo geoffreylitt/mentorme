@@ -18,11 +18,23 @@ body {
 h2, h3 {
   text-transform: uppercase;
 }
-.subheading {
+
+#main .subheading {
   margin-left: 20px;
+}
+
+#hero h2 {
+  line-height: 32px;
+  margin: 0;
+  &.subheading {
+    margin-bottom: 10px;
+  }
+}
+
+.subheading {
   text-transform: none;
   color: gray;
-  font-size: .7em;
+  font-size:  17px;
 }
 
 .mentorbox {
