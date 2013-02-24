@@ -50,9 +50,19 @@ a.profile{
   }
 }
 
-.video_box{
+iframe.titanpad{
+  margin-top: 10px;
+  width: 940px;
+  height: 500px;
+}
 
-  height: 520px;
+h4.titanpad{
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.video_box{
+  height: 500px;
   width: 945px;
   margin-bottom: 20px;
   position: relative;
@@ -94,7 +104,7 @@ a.profile{
         display: none;
         z-index: 5;
 
-        top: 230px;
+        top: 210px;
         left: 370px;
       }
 

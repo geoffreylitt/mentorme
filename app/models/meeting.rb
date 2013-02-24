@@ -57,6 +57,10 @@ class Meeting < ActiveRecord::Base
     token
   end
 
+  def titanpad_url
+    "http://titanpad.com/#{self.titanpad_id}?fullScreen=1"
+  end
+
   protected
 
   def populate_session_id
@@ -71,6 +75,7 @@ class Meeting < ActiveRecord::Base
   end
 
   def populate_titanpad_id
+    self.titanpad_id = SecureRandom.urlsafe_base64(15)
   end
 
 end
