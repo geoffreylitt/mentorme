@@ -18,7 +18,7 @@ class MeetingsController < ApplicationController
       end
       meeting_hash[:unix_timestamp] = meeting.unix_timestamp
       meeting_hash[:opentok_session_id] = meeting.opentok_session_id
-      meeting_hash[:opentok_token] = meeting.token_for(User.find(params[:user_id])
+      meeting_hash[:opentok_token] = meeting.token_for(User.find(params[:user_id]))
 
       response << meeting_hash
     end
