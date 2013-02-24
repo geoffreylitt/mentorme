@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130224081445) do
+ActiveRecord::Schema.define(:version => 20130224110156) do
 
   create_table "languages", :force => true do |t|
     t.string   "name"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20130224081445) do
     t.integer  "mentor_id"
     t.integer  "mentee_id"
     t.integer  "translator_id"
+    t.string   "titanpad_id"
   end
 
   create_table "skills", :force => true do |t|
@@ -56,10 +57,10 @@ ActiveRecord::Schema.define(:version => 20130224081445) do
 
   create_table "time_slots", :force => true do |t|
     t.datetime "time"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "user_id"
-    t.boolean  "taken",      :default => false
+    t.boolean  "taken"
   end
 
   create_table "users", :force => true do |t|
