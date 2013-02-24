@@ -1,27 +1,45 @@
-%h1= "Edit #{@user.name}" 
+%h2= @user.name
 
-= form_tag :action => :update do
-  = "Bio"
-  = text_field_tag 'bio', @user.bio
-  %br
-  = "Languages you speak:"
-  - ids = @user.languages.map{ |ul| ul.id }
-  - Language.all.each do |l|
-    = "#{l.name}"
-    = check_box_tag "languages[]", "#{l.id}", ids.include?(l.id)
-  %br
-  = "Skills you want to learn:"
-  - learn_skills = @user.learn_skills.map{ |ls| ls.skill_id }
-  - @skills.each do |s|
-    = s.name
-    = check_box_tag "learn_skills[]" , "#{s.id}", learn_skills.include?(s.id)
-  %br
-  = "Skills you have:"
-  - teach_skills = @user.teach_skills.map{ |ts| ts.skill_id }
-  - @skills.each do |s|
-    = s.name
-    = check_box_tag "teach_skills[]", "#{s.id}", teach_skills.include?(s.id)
-
-  %br
-  = submit_tag
-
+.row
+  = form_tag({:action => :update}, {:class => "form-horizontal"}) do
+    .span6
+      %fieldset
+        .control-group
+          %label.control-label{:for => "bio"} Bio
+          .controls
+            = text_area_tag 'bio', @user.bio, :rows => 3
+        .control-group
+          %label.control-label Languages
+          .controls  
+            - ids = @user.languages.map{ |ul| ul.id }
+            - Language.all.each do |l|
+              %label.checkbox
+                = check_box_tag "languages[]", "#{l.id}", ids.include?(l.id)
+                = l.name
+        .control-group
+          %label.control-label
+            Skills 
+            %br
+            %span.muted To learn
+          .controls
+            - learn_skills = @user.learn_skills.map{ |ls| ls.skill_id }
+            - @skills.each do |s|
+              %label.checkbox
+                = check_box_tag "learn_skills[]" , "#{s.id}", learn_skills.include?(s.id)
+                = s.name
+    .span6
+      %fieldset
+        .control-group
+          %label.control-label
+            Skills 
+            %br
+            %span.muted To teach
+          .controls
+            - teach_skills = @user.teach_skills.map{ |ts| ts.skill_id }
+            - @skills.each do |s|
+              %label.checkbox
+                = check_box_tag "teach_skills[]", "#{s.id}", teach_skills.include?(s.id)
+                = s.name
+        .control-group
+          .controls
+            = submit_tag nil, :class => "button"

@@ -124,3 +124,14 @@ h2, h3 {
     }
   }
 }
+
+input.button {
+  border: none;
+  color: white;
+  text-transform: uppercase;
+  font-family: 'Lato';
+  font-weight: 900;
+  background: #3e495d;
+  border-radius: 3px;
+  padding: 10px 20px;
+}

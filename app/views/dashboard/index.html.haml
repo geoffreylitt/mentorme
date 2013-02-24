@@ -49,7 +49,7 @@
                         %img{:src => "#{m.translator.image}?width=30&height=30"}
                         = link_to m.translator.name, m.translator
                         %span.type , Translator
-                  - if m.time < Time.now - 30.minutes
+                  - if m.time < Time.now + 30.minutes
                     = link_to "Join!", m 
     .row
       .span4

@@ -72,6 +72,9 @@
     text-align: center;
     color: white;
     font-weight: 900;
+    &:hover, &:active, &:visited {
+      text-decoration: none;
+    }
 
     a, a:hover, a:active, a:visited {
       text-transform: uppercase;
