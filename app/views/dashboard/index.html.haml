@@ -1,54 +1,67 @@
-%h3
-  = "Hi, #{current_user.first_name}!"
-%h2
-  = "Your matches:"
-- matches = @matches.first(5)
-- matches.each do |match|
-  - user = User.find(match.first.to_i)
-  = link_to "#{user.name}", user
-  = "Skills: "
-  - user.teach_skills.each do |t|
-    = Skill.find(t.skill_id).name
-  = "Languages: "
-  - user.languages.each do |l|
-    = l.name
-  %br 
+.row
+  .span8
+    %h2
+      Mentors
+      %span.subheading Recommended based on your interests
 
-- if @user.meetings
-  %h2
-    = "Your upcoming meetings:"
-  - @user.meetings.each do |m|
-    = "#{m.time} - Mentor: "
-    - if m.mentor.id == @user.id
-      = "You"
-    - else
-      = link_to "#{m.mentor.name}", m.mentor 
-    = ", Mentee: "
-    - if m.mentee.id == @user.id
-      = "You"
-    - else
-      = link_to "#{m.mentee.name}", m.mentee
-    - if m.translator
-      = ", Translator: "
-      - if m.translator.id == @user.id
-        = "You"
-      - else
-        = link_to "#{m.translator.name}", m.translator
+    - @matches.first(5).each do |user|
+      .mentorbox
+        %img.profile{:src => "#{user.image}?width=120&height=120"}
+        .info
+          %h3= link_to user.name, user
+          %p.attributes
+            %i.icon-globe
+            = user.location
+            %i.icon-bullhorn
+            = user.language_list
+          = "Skills: "
+          - user.teach_skills.each do |t|
+            = Skill.find(t.skill_id).name
+  .span4
+    .row
+      .span4
+        - if @user.meetings
+          .meetingsbox
+            .title
+              %h2 Upcoming Meetings
+            .mcontent
+              - @user.meetings.each do |m|
+                .mitem
+                  %h4
+                    %span.highlight= m.relative_day
+                    at
+                    %span.highlight= m.hour
+                    with
 
+                  - unless m.mentor.id == @user.id
+                    .mprofile
+                      %img{:src => "#{m.mentor.image}?width=30&height=30"}
+                      = link_to m.mentor.name, m.mentor
+                      %span.type , Mentor
+                  - unless m.mentee.id == @user.id
+                    .mprofile
+                      %img{:src => "#{m.mentor.image}?width=30&height=30"}
+                      = link_to m.mentee.name, m.mentee
+                      %span.type , Mentee
+                  - if m.translator
+                    - unless m.translator.id == @user.id
+                      .mprofile
+                        %img{:src => "#{m.mentor.image}?width=30&height=30"}
+                        = link_to m.translator.name, m.translator
+                        %span.type , Translator
+    .row
+      .span4
+        %h2 Meetings that need translating
 
-/todo: only show this part if the user can translate
+        - if @translate_meetings.empty?
+          %p No meetings currently need translation!
 
-%h2 Meetings that need translating
-
-- if @translate_meetings.empty?
-  %p No meetings currently need translation!
-
-- else  
-  %ul
-    - @translate_meetings.each do |tm|
-      %li
-        = tm.time.strftime("%a, %B %d -- %H:%M") + " - " + (tm.time + 15.minutes).strftime("%H:%M")
-        = form_for tm do |f|
-          = f.hidden_field :translator_id, :value => current_user.id
-          = f.submit "Translate this meeting"
+        - else  
+          %ul
+            - @translate_meetings.each do |tm|
+              %li
+                = tm.time.strftime("%a, %B %d -- %H:%M") + " - " + (tm.time + 15.minutes).strftime("%H:%M")
+                = form_for tm do |f|
+                  = f.hidden_field :translator_id, :value => current_user.id
+                  = f.submit "Translate this meeting"
 

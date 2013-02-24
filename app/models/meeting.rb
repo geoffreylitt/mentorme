@@ -20,6 +20,14 @@ class Meeting < ActiveRecord::Base
     role_str
   end
 
+  def relative_day
+    self.time.to_date.to_words
+  end
+
+  def hour
+    self.time.strftime("%l:%M")
+  end
+
   def mentor_name
     self.mentor.name
   end

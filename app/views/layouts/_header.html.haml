@@ -1,2 +1,16 @@
 %header
-  %h1 Takeflight!
+  .container
+    .row
+      .span4
+        %h1
+          = link_to "TakeFlight",root_url
+      .span8
+        %ul.menu
+          %li.logout
+            = link_to "Logout", "/logout"
+          %li
+            = link_to current_user.name, @user
+          %li
+            %span.badge.badge-white= current_user.meetings.count
+            = link_to "Meetings", "#"
+            %i.icon-chevron-down.icon-white

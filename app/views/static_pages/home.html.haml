@@ -1,6 +1,14 @@
-%p Welcome to Takeflight!
-
-- if(!current_user)
-  = link_to "LOGIN!", "/auth/facebook"
-- else
-  Logged in as: #{current_user.first_name} #{current_user.last_name}
+#banner
+  .container
+    .row
+      .span12
+        %h1 TakeFlight
+#hero
+  .container
+    .row
+      .span7
+        %h2 Connect with mentors
+        %h3 Professional advice, from anywhere in the world.
+        %p Connec
+      .span4.offset1
+        = link_to "LOGIN!", "/auth/facebook"

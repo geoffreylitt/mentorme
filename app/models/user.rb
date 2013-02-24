@@ -10,6 +10,18 @@ class User < ActiveRecord::Base
     first_name + ' ' + last_name
   end
   
+  def language_list
+    list = ""
+    self.languages.each_with_index do |l,i|
+      if i == 0
+        list << l.name
+      else
+        list << ", #{l.name}"
+      end
+    end
+    list
+  end
+
   def meetings
     meetings = []
     meetings << Meeting.where(:mentor_id => self.id)
@@ -43,12 +55,13 @@ class User < ActiveRecord::Base
     users.reject!{ |u| u.id == self.id }
     users.each do |u|
       ts = u.teach_skills.map{ |s| s.skill_id }
-      ul = u.languages.map{ |ls| ls.name } 
+      ul = u.languages.map{ |ls| ls.name }
       skill_intersect = (ts & ls).count
       language_intersect = (l & ul).count
       score = skill_intersect + language_intersect * 5
       scores["#{u.id}"] = score
     end
-    scores.sort_by{ |k, v| v}.reverse
+    scores = scores.sort_by{ |k, v| v}.reverse
+    matches = scores.map{ |s| User.find(s.first.to_i)}
   end
 end

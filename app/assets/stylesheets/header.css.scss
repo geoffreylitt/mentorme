@@ -1,5 +1,44 @@
 header{
-  background-color: #ddd;
-  margin-bottom: 20px;
+  background: url('header-background.jpg') center 0 repeat-x;
   padding: 10px;
+
+  ol, ul {
+  list-style: none;
+  }
+
+  .menu {
+    margin-top: 10px;
+  }
+
+  .badge-white {
+    background-color: white;
+    color: #3e495d;
+  }
+
+  li {
+    float: right;
+    padding: 9px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    background: #3e495d;
+    text-transform: uppercase;
+    margin-left: 14px;
+    border-radius: 5px;
+    color: white;
+    a {
+      padding: 0 5px;
+    }
+    &.logout {
+      background: none;
+      color: #3e495d;
+    }
+  }
+
+  a {
+    color: inherit;
+    &:visited, &:active, &:hover {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
 }
