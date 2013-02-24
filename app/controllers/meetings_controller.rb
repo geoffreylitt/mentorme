@@ -41,12 +41,9 @@ class MeetingsController < ApplicationController
 
     @user_role = @meeting.role(current_user) 
 
-    #enable this and make a helper method once we have users
-    #@user_role = current_user.role_in_meeting(@meeting)
-
-    #todo: populate names for real
-
     @token = opentok.generate_token :session_id => @session, :connection_data => @user_role
+
+    @shared_interests = @meeting.mentor.skill_overlap_with @meeting.mentee
 
   end
 

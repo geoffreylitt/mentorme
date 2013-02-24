@@ -38,9 +38,23 @@ a.profile{
   text-align: right;
 }
 
+.metadata{
+  color: white;
+  font-size: 20px;
+  padding: 5px 15px;
+  border-radius: 5px;
+  background: #3e495d;
+
+  h4{
+    font-size: 14px;
+  }
+}
+
 .video_box{
-  height: 800px;
-  width: 960px;
+
+  height: 520px;
+  width: 945px;
+  margin-bottom: 20px;
   position: relative;
 
   .stream_container{
@@ -98,6 +112,7 @@ a.profile{
   .stream{
     border: solid 2px #4e4e4e;
     background-image: url("/assets/empty_profile.png");
+    background-size: 100%;
 
   }
 }

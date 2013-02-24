@@ -61,4 +61,11 @@ class User < ActiveRecord::Base
     scores = scores.sort_by{ |k, v| v}.reverse
     matches = scores.map{ |s| User.find(s.first.to_i)}
   end
+
+  def skill_overlap_with(user)
+    my_skills = (self.learn_skills + self.teach_skills).map{|s| s.skill.name}
+    their_skills = (user.learn_skills + user.teach_skills).map{|s| s.skill.name}
+
+    my_skills & their_skills
+  end
 end
