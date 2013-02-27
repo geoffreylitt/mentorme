@@ -7,5 +7,8 @@ TakeFlight connects young students in the Arab region with mentors (both abroad 
 
 TakeFlight uses the OpenTok API for audio/video chat, Facebook Connect for user authentication, and Heroku for hosting. An alpha version is available at [this link](http://takeflight.herokuapp.com). It is in an incomplete "hackathon" state, so please use at your own risk.
 
-[Videochat demo](https://raw.github.com/geoffreylitt/mentorme/master/screenshot.png)
+Videochat demo screenshot
+------------------------
+
+![Videochat demo screenshot](https://raw.github.com/geoffreylitt/mentorme/master/screenshot.png)
 
